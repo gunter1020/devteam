@@ -1,0 +1,13 @@
+{
+  "name": "gunter",
+  "owner": { "name": "Gunter Chou" },
+  "description": "Gunter 的私人 Claude Code plugin",
+  "plugins": [
+    {
+      "name": "devteam",
+      "source": "./",
+      "description": "開發團隊角色（rd、pm、qa、sa、uiux）與 autopilot 工作流",
+      "category": "engineering"
+    }
+  ]
+}

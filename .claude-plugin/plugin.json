@@ -1,0 +1,8 @@
+{
+  "name": "devteam",
+  "displayName": "devteam",
+  "version": "0.1.0",
+  "description": "開發團隊角色（rd、pm、qa、sa、uiux）與 autopilot 工作流；專案事實由各 repo 的 docs/agents/ 提供",
+  "author": { "name": "Gunter Chou" },
+  "license": "UNLICENSED"
+}
