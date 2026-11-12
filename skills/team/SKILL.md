@@ -17,7 +17,7 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 
 | 檔案 | 節 |
 | --- | --- |
-| `AGENTS.md` | 產品的使用者是誰；角色另外要停下來問的事 |
+| `AGENTS.md` | 產品的使用者是誰；角色另外要停下來問的事；一行指向 `docs/agents/` |
 | `CONTEXT.md` | 詞彙（選用） |
 | `docs/agents/issue-tracker.md` | 讀寫票的指令、〈什麼該變成票〉、〈Definition of Done〉 |
 | `docs/agents/triage-labels.md` | 類別、狀態與手動維護的標籤字串 |
