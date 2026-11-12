@@ -11,6 +11,7 @@
 | `devteam:uiux` | 量畫面對齊與跑版、出設計稿 |
 | `/devteam:autopilot` | 把一件事整串交給團隊，只在停點問使用者 |
 | `devteam:team` | 分工、專案契約、取用 skill 與推薦選項的判準；角色開工時先讀 |
+| `/devteam:setup-devteam` | 引導你替自己的 repo 設計專案契約：推得出的從 repo 查，要決定的才問你，寫完逐項驗證 |
 
 ## 安裝
 
@@ -21,6 +22,10 @@ claude plugin install devteam@gunter
 
 角色會用到 [mattpocock/skills](https://github.com/mattpocock/skills)（`tdd`、`diagnosing-bugs`、`triage`、`codebase-design` 等），要另外安裝。
 
-## 專案要提供的檔
+## 接一個新 repo
 
-清單與每個檔要有的節寫在 [`skills/team/SKILL.md`](skills/team/SKILL.md)〈專案契約〉。缺檔或缺節時角色會回報缺哪一個。
+在那個 repo 跑 `/devteam:setup-devteam`。契約的清單在 [`skills/team/SKILL.md`](skills/team/SKILL.md)〈專案契約〉，每一節要寫什麼在 [`skills/setup-devteam/contract.md`](skills/setup-devteam/contract.md)。
+
+## 改這個 plugin
+
+改完跑 `claude plugin validate .`，升 `.claude-plugin/plugin.json` 的 `version` 再 push；本機以 `claude plugin marketplace update gunter` 取得新版。

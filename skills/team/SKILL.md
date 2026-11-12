@@ -13,16 +13,16 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 
 ## 專案契約
 
-角色只寫通用的做法，專案的事實由 repo 裡這幾個檔提供，角色以「檔名〈節名〉」引用。缺檔或缺節時回報缺哪一個，不臆測。
+角色只寫通用的做法，專案的事實由 repo 裡這幾個檔提供，角色以「檔名〈節名〉」引用。缺檔或缺節時回報缺哪一個、建議使用者跑 `/devteam:setup-devteam` 補上，不臆測。每一節要寫什麼在 `${CLAUDE_PLUGIN_ROOT}/skills/setup-devteam/contract.md`。
 
-| 檔案 | 提供什麼 |
+| 檔案 | 節 |
 | --- | --- |
-| `AGENTS.md` | 產品的使用者是誰、程式碼規則 |
-| `CONTEXT.md` | 詞彙 |
-| `docs/agents/issue-tracker.md` | 讀寫票的 `gh` 指令、〈什麼該變成票〉、〈Definition of Done〉 |
-| `docs/agents/triage-labels.md` | 類別與狀態的標籤字串；有接手（`in-progress`）、等外部（`waiting-upstream`）這類手動標籤時也列在這裡 |
-| `docs/agents/dev-workflow.md` | 〈指令〉（邊做邊驗、結束前的全套）、〈分支、commit 與合併〉、〈畫面〉（哪些路徑算畫面、共用樣式的權威、要量的寬度與配色、起服務與截圖）、〈實機驗收〉（選用；有這一節就是交付前必做） |
-| `docs/agents/testing.md` | 〈六條門檻〉、〈第 5 條：反向驗證怎麼做〉與它的〈這個 repo 的指令〉（單跑一支、全套、注入缺陷的工具）、〈測試分層〉、〈docstring 寫什麼〉；寫測試或審測試前先讀 |
+| `AGENTS.md` | 產品的使用者是誰；角色另外要停下來問的事 |
+| `CONTEXT.md` | 詞彙（選用） |
+| `docs/agents/issue-tracker.md` | 讀寫票的指令、〈什麼該變成票〉、〈Definition of Done〉 |
+| `docs/agents/triage-labels.md` | 類別、狀態與手動維護的標籤字串 |
+| `docs/agents/dev-workflow.md` | 〈指令〉、〈分支、commit 與合併〉、〈畫面〉（選用）、〈實機驗收〉（選用；有這一節就是交付前必做） |
+| `docs/agents/testing.md` | 〈六條門檻〉、〈第 5 條：反向驗證怎麼做〉與它的〈這個 repo 的指令〉、〈測試分層〉、〈docstring 寫什麼〉；寫測試或審測試前先讀 |
 
 ## 每個角色都照做
 
