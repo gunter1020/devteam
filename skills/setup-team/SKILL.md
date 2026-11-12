@@ -1,9 +1,9 @@
 ---
-name: setup-devteam
+name: setup-team
 description: 引導使用者替自己的 repo 設計 devteam 的專案契約（`docs/agents/` 底下的檔）：先從 repo 推出事實，只把推不出來的問使用者，寫完逐項驗證。接新 repo，或角色回報缺契約的檔或節時使用。
 ---
 
-# setup-devteam
+# setup-team
 
 devteam 的角色只寫通用的做法，專案的事實由契約提供。契約是一組檔與節，清單與每一節要寫到什麼程度在 [`contract.md`](contract.md)；先讀完它再開始。
 

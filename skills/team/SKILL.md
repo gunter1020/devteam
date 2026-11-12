@@ -13,7 +13,7 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 
 ## 專案契約
 
-角色只寫通用的做法，專案的事實由 repo 裡這幾個檔提供，角色以「檔名〈節名〉」引用。缺檔或缺節時回報缺哪一個、建議使用者跑 `/devteam:setup-devteam` 補上，不臆測。每一節要寫什麼在 `${CLAUDE_PLUGIN_ROOT}/skills/setup-devteam/contract.md`。
+角色只寫通用的做法，專案的事實由 repo 裡這幾個檔提供，角色以「檔名〈節名〉」引用。缺檔或缺節時回報缺哪一個、建議使用者跑 `/devteam:setup-team` 補上，不臆測。每一節要寫什麼在 `${CLAUDE_PLUGIN_ROOT}/skills/setup-team/contract.md`。
 
 | 檔案 | 節 |
 | --- | --- |
