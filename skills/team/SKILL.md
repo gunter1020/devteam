@@ -36,7 +36,7 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 
 frontmatter 有 `disable-model-invocation: true` 的 skill，代理用 Skill 工具叫不動。要照它做時：
 
-1. 找 SKILL.md：在 `~/.claude/plugins/cache` 與 Claude 桌面版的資料目錄（macOS 是 `~/Library/Application Support/Claude`，Windows 是 `%APPDATA%\Claude`）底下找 `*/skills/*/<skill>/SKILL.md`。出來多份時取所屬 plugin 的 `.claude-plugin/plugin.json` 版本最高的。找不到就回報沒裝，不猜路徑。
+1. 找 SKILL.md：在 `~/.claude/plugins`（本機裝在底下的 `cache/`，雲端 session 在 `synced/`）與 Claude 桌面版的資料目錄（macOS 是 `~/Library/Application Support/Claude`，Windows 是 `%APPDATA%\Claude`）底下找 `*/skills/*/<skill>/SKILL.md`。出來多份時取所屬 plugin 的 `.claude-plugin/plugin.json` 版本最高的。找不到就回報沒裝，不猜路徑。
 2. 連同它引用的參考文件讀完照做。寫 ADR、查或寫 out-of-scope 知識庫的步驟，repo 沒有那個目錄（`docs/adr/`、`.out-of-scope/`）就略過。
 3. 回報標明「照 `<skill>` 的 SKILL.md 展開，不是跑 `/<skill>`」。
 
