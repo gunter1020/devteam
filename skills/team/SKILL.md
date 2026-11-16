@@ -7,7 +7,7 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 
 ## 分工
 
-開發與審查交給 devteam 的角色：`devteam:rd`、`devteam:pm`、`devteam:qa`、`devteam:sa`、`devteam:uiux`，何時用哪一個寫在各自的 description。主 session 不 inline 從頭做到尾。合併前的關卡與開 PR、合併的分工寫在 `${CLAUDE_PLUGIN_ROOT}/agents/rd.md`；主 session 已經自己做完實作的那一次不必重開代理重做，剩下的關卡照它第三節走完，合併來自票的 PR 之後、回報完成之前走 Definition of Done。
+開發與審查交給 devteam 的角色：`devteam:rd`、`devteam:pm`、`devteam:qa`、`devteam:sa`、`devteam:uiux`，何時用哪一個寫在各自的 description。主 session 不 inline 從頭做到尾。合併前的關卡與開 PR、合併的分工寫在 `${CLAUDE_PLUGIN_ROOT}/agents/rd.md`；主 session 已經自己做完實作的那一次不必重開代理重做，剩下的關卡照它〈關卡〉走完，合併來自票的 PR 之後、回報完成之前走 Definition of Done。
 
 只有 `rd` 改 repo 檔案與 commit；其他角色不改，也不用 Bash 繞過，寫 tracker、臨時注入缺陷與實機驗收的例外寫在各自的定義裡。
 
