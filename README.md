@@ -20,7 +20,7 @@ claude plugin marketplace add gunter1020/devteam
 claude plugin install devteam@gunter
 ```
 
-角色會用到 [mattpocock/skills](https://github.com/mattpocock/skills)（`tdd`、`diagnosing-bugs`、`triage`、`codebase-design` 等），要另外安裝。
+角色會用到 [mattpocock/skills](https://github.com/mattpocock/skills)（`tdd`、`diagnosing-bugs`、`triage`、`codebase-design` 等），`uiux` 量畫面還要 [`agent-browser`](https://github.com/vercel-labs/agent-browser) skill，都要另外安裝。
 
 ## 接一個新 repo
 
