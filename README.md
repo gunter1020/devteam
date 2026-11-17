@@ -17,7 +17,7 @@
 
 ```bash
 claude plugin marketplace add gunter1020/devteam
-claude plugin install devteam@gunter
+claude plugin install devteam@gunter-plugins
 ```
 
 角色會用到 [mattpocock/skills](https://github.com/mattpocock/skills)（`tdd`、`diagnosing-bugs`、`triage`、`codebase-design` 等），`uiux` 量畫面還要 [`agent-browser`](https://github.com/vercel-labs/agent-browser) skill，都要另外安裝。
@@ -30,4 +30,4 @@ claude plugin install devteam@gunter
 
 改完跑 `claude plugin validate .` 再 push。`plugin.json` 不設 `version`，安裝的版本跟著 commit 走。
 
-本機取得新版：`claude plugin marketplace update gunter`，再 `claude plugin update devteam@gunter`（前者只更新 marketplace 的副本，安裝的版本要後者才會換），開著的 session 再 `/reload-plugins`。
+本機取得新版：`claude plugin marketplace update gunter-plugins`，再 `claude plugin update devteam@gunter-plugins`（前者只更新 marketplace 的副本，安裝的版本要後者才會換），開著的 session 再 `/reload-plugins`。

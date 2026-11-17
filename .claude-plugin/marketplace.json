@@ -1,5 +1,5 @@
 {
-  "name": "gunter",
+  "name": "gunter-plugins",
   "owner": { "name": "Gunter Chou" },
   "description": "Gunter 的私人 Claude Code plugin",
   "plugins": [
