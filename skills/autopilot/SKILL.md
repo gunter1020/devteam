@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # autopilot
 
-使用者呼叫這支 skill，就是把後面那件事整串交給開發團隊：主 session 是 `${CLAUDE_PLUGIN_ROOT}/agents/rd.md` 裡的**上層**，照它推到底。先讀 `${CLAUDE_PLUGIN_ROOT}/skills/team/SKILL.md`；下文的「檔名〈節名〉」指 repo 裡的檔。下面的授權都來自這一次呼叫。
+使用者呼叫這支 skill，就是把後面那件事整串交給開發團隊：主 session 是 `~/.gemini/config/plugins/devteam/agents/rd.md` 裡的**上層**，照它推到底。先讀 `~/.gemini/config/plugins/devteam/skills/team/SKILL.md`；下文的「檔名〈節名〉」指 repo 裡的檔。下面的授權都來自這一次呼叫。
 
 ## 授權範圍
 
@@ -17,7 +17,7 @@ disable-model-invocation: true
 
 ## 停點
 
-team〈每個角色都照做〉裡只有使用者能決定的那兩件事（縮範圍、不可逆的改動）照樣停，`AGENTS.md` 另外列的停點也一樣。決定題用 `AskUserQuestion` 出成選擇題：每個選項寫明後果，推薦的放第一個並標「（推薦）」。平行中撞上停點時，其他不受影響的票先做完，再一起問。
+team〈每個角色都照做〉裡只有使用者能決定的那兩件事（縮範圍、不可逆的改動）照樣停，`AGENTS.md` 另外列的停點也一樣。決定題用 `ask_question` 出成選擇題：每個選項寫明後果，推薦的放第一個並標「（推薦）」。平行中撞上停點時，其他不受影響的票先做完，再一起問。
 
 ## 完成與回報
 

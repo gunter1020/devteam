@@ -7,13 +7,13 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 
 ## 分工
 
-開發與審查交給 devteam 的角色：`devteam:rd`、`devteam:pm`、`devteam:qa`、`devteam:sa`、`devteam:uiux`，何時用哪一個寫在各自的 description。主 session 不 inline 從頭做到尾。合併前的關卡與開 PR、合併的分工寫在 `${CLAUDE_PLUGIN_ROOT}/agents/rd.md`；主 session 已經自己做完實作的那一次不必重開代理重做，剩下的關卡照它〈關卡〉走完，合併來自票的 PR 之後、回報完成之前走 Definition of Done。
+開發與審查交給 devteam 的角色：`devteam:rd`、`devteam:pm`、`devteam:qa`、`devteam:sa`、`devteam:uiux`，何時用哪一個寫在各自的 description。主 session 不 inline 從頭做到尾。合併前的關卡與開 PR、合併的分工寫在 `~/.gemini/config/plugins/devteam/agents/rd.md`；主 session 已經自己做完實作的那一次不必重開代理重做，剩下的關卡照它〈關卡〉走完，合併來自票的 PR 之後、回報完成之前走 Definition of Done。
 
 只有 `rd` 改 repo 檔案與 commit；其他角色不改，也不用 Bash 繞過，寫 tracker、臨時注入缺陷與實機驗收的例外寫在各自的定義裡。
 
 ## 專案契約
 
-角色只寫通用的做法，專案的事實由 repo 裡這幾個檔提供，角色以「檔名〈節名〉」引用。缺檔或缺節時回報缺哪一個、建議使用者跑 `/devteam:setup-team` 補上，不臆測。每一節要寫什麼在 `${CLAUDE_PLUGIN_ROOT}/skills/setup-team/contract.md`。
+角色只寫通用的做法，專案的事實由 repo 裡這幾個檔提供，角色以「檔名〈節名〉」引用。缺檔或缺節時回報缺哪一個、建議使用者跑 `/devteam:setup-team` 補上，不臆測。每一節要寫什麼在 `~/.gemini/config/plugins/devteam/skills/setup-team/contract.md`。
 
 | 檔案 | 節 |
 | --- | --- |
@@ -36,7 +36,7 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 
 frontmatter 有 `disable-model-invocation: true` 的 skill，代理用 Skill 工具叫不動。要照它做時：
 
-1. 找 SKILL.md：在 `~/.claude/plugins`（本機裝在底下的 `cache/`，雲端 session 在 `synced/`）與 Claude 桌面版的資料目錄（macOS 是 `~/Library/Application Support/Claude`，Windows 是 `%APPDATA%\Claude`）底下找 `*/skills/*/<skill>/SKILL.md`。出來多份時取所屬 plugin 的 `.claude-plugin/plugin.json` 版本最高的。找不到就回報沒裝，不猜路徑。
+1. 找 SKILL.md：在 `~/.gemini/config/plugins`、`~/.gemini/config/skills` 與工作區 `.agents/skills`（以及若仍存在時的 `~/.claude/plugins`）底下找 `*/skills/*/<skill>/SKILL.md` 或 `<skill>/SKILL.md`。出來多份時取最新或最高優先級的那份。找不到就回報沒裝，不猜路徑。
 2. 連同它引用的參考文件讀完照做。寫 ADR、查或寫 out-of-scope 知識庫的步驟，repo 沒有那個目錄（`docs/adr/`、`.out-of-scope/`）就略過。
 3. 回報標明「照 `<skill>` 的 SKILL.md 展開，不是跑 `/<skill>`」。
 
