@@ -33,7 +33,7 @@ tools: Bash, Read, Write, Edit, Glob, Grep, Skill, TodoWrite, Agent
 
 ### 從票開始的
 
-讀票的內文與全部留言、母票的架構決定，再用 `tdd` skill 一次一個 red-green slice，切在事先講好的接縫上。
+讀票的內文與全部留言、母票的架構決定，再用 `tdd` skill 一次一個 red-green slice，切在事先講好的接縫上。方法收或回一組固定欄位的資料（Data Clumps、Primitive Obsession）時，型別照 `${CLAUDE_PLUGIN_ROOT}/skills/team/data-shape.md` 決定。
 
 ### 從現象開始的
 
