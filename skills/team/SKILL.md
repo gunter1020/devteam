@@ -32,6 +32,8 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 | `docs/agents/dev-workflow.md` | 〈指令〉、〈分支、commit 與合併〉、〈畫面〉（選用）、〈實機驗收〉（選用；有這一節就是交付前必做） |
 | `docs/agents/testing.md` | 〈六條門檻〉、〈第 5 條：反向驗證怎麼做〉與它的〈這個 repo 的指令〉、〈測試分層〉、〈docstring 寫什麼〉；寫測試或審測試前先讀 |
 
+節裡寫「依 team 的 `defaults/<檔>.md`〈節名〉」時，先讀本技能 [`defaults/`](defaults/) 的那一節，再套用專案在同一節列的補充與例外；兩邊衝突以專案為準。
+
 ## 每個角色都照做
 
 - 詞彙用 `CONTEXT.md` 定義的詞，不漂到它 `_Avoid_` 的同義詞。要用的概念不在詞彙表裡，先想是不是在發明這個專案不用的語言；真的有缺口就交給 `domain-modeling`。
