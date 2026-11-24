@@ -12,3 +12,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: plugin manifest 與 frontmatter
         run: npx --yes @anthropic-ai/claude-code plugin validate .
+      - name: 在空白 repo 安裝 Codex 外掛並讀取共用角色
+        env:
+          CODEX_HOME: ${{ runner.temp }}/devteam-codex
+        run: |
+          mkdir -p "$CODEX_HOME"
+          consumer=$(mktemp -d)
+          git init -q "$consumer"
+          cd "$consumer"
+          npx --yes @openai/codex@0.172.0 plugin marketplace add "$GITHUB_WORKSPACE"
+          installation=$(npx --yes @openai/codex@0.172.0 plugin add devteam@gunter-codex --json)
+          installed=$(jq -er '.installedPath' <<< "$installation")
+          diff -qr "$GITHUB_WORKSPACE/skills" "$installed/skills"
+          diff -qr "$GITHUB_WORKSPACE/agents" "$installed/agents"

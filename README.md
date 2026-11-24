@@ -1,33 +1,37 @@
 # devteam
 
-開發團隊的五個角色與 autopilot 工作流，做成 Claude Code plugin。角色只寫通用的做法，各專案的指令、測試分層、標籤與畫面規則放在該 repo 的 `docs/agents/`。
-
-| 元件 | 用途 |
-| --- | --- |
-| `devteam:rd` | 接票實作、從壞掉的現象修 bug、過合併前的關卡、開 PR、合併後收票；唯一會寫檔與 commit 的角色 |
-| `devteam:pm` | 驗收一次開發、triage 還沒定案的票 |
-| `devteam:qa` | 審測試證據；有定義實機驗收的 repo 也做實機驗收 |
-| `devteam:sa` | 架構審查、巡檢值得加深的模組 |
-| `devteam:uiux` | 量畫面對齊與跑版、出設計稿 |
-| `/devteam:autopilot` | 把一件事整串交給團隊，只在停點問使用者 |
-| `devteam:team` | 分工、專案契約、取用 skill 與推薦選項的判準；角色開工時先讀 |
-| `/devteam:setup-team` | 引導你替自己的 repo 設計專案契約：推得出的從 repo 查，要決定的才問你，寫完逐項驗證 |
+在 Claude Code 或 Codex 裡把一張票交給開發團隊，或指定 RD、PM、QA、SA、UI/UX 處理單一任務。[角色說明](agents/)
 
 ## 安裝
 
-```bash
+**ChatGPT 工作區**　在 **Admin → Plugins → Add → Import marketplace** 匯入 `gunter1020/devteam`，選擇含 Codex marketplace 的來源並啟用 devteam。選分支時，新匯入的 marketplace 每日檢查更新，也可用 **Sync now** 提前同步。固定 commit 則停在該版本。[GitHub 匯入與同步](https://learn.chatgpt.com/docs/enterprise/plugin-management)
+
+**Codex CLI**　在本儲存庫執行：
+
+```sh
+codex plugin marketplace add .
+codex plugin add devteam@gunter-codex
+```
+
+**Claude Code**：
+
+```sh
 claude plugin marketplace add gunter1020/devteam
 claude plugin install devteam@gunter-plugins
 ```
 
-角色會用到 [mattpocock/skills](https://github.com/mattpocock/skills)（`tdd`、`diagnosing-bugs`、`triage`、`codebase-design` 等），`uiux` 量畫面還要 [`agent-browser`](https://github.com/vercel-labs/agent-browser) skill，都要另外安裝。
+依任務另裝 [mattpocock/skills](https://github.com/mattpocock/skills) 的開發與審查技能，以及畫面量測用的 [agent-browser](https://github.com/vercel-labs/agent-browser)。使用 agent-browser CLI 的執行環境也要有該指令。
 
-## 接一個新 repo
+## 在專案使用
 
-在那個 repo 跑 `/devteam:setup-team`。契約的清單在 [`skills/team/SKILL.md`](skills/team/SKILL.md)〈專案契約〉，每一節要寫什麼在 [`skills/setup-team/contract.md`](skills/setup-team/contract.md)。
+- **接新 repo**　在目標 repo 呼叫 devteam 的 `setup-team`，建立專案契約。各專案維護自己的指令、標籤與例外；採用預設的章節從 `setup-team` 的 `defaults/` 複製後改寫。[契約內容](skills/setup-team/contract.md)
+- **指定角色**　例如「請 devteam 的 QA 審查這張 PR 的測試證據」。Claude Code 也可直接指定 `devteam:qa`。Codex 透過 `team` 技能把角色工作交給目前工作階段的子代理。
+- **交辦整張票**　明確選擇 devteam 的 `autopilot` 並指定票號與授權範圍。在 Claude Code 使用 `/devteam:autopilot`。[Autopilot 流程](skills/autopilot/SKILL.md)
 
-## 改這個 plugin
+## 維護
 
-改完跑 `claude plugin validate .` 再 push。`plugin.json` 不設 `version`，安裝的版本跟著 commit 走。
+角色定義在 [agents/](agents/)，三個技能在 [skills/](skills/)。Claude Code 自動載入 `agents/`；Codex 安裝時複製整個外掛根目錄，`team` 技能從那裡讀角色檔。
 
-本機取得新版：`claude plugin marketplace update gunter-plugins`，再 `claude plugin update devteam@gunter-plugins`（前者只更新 marketplace 的副本，安裝的版本要後者才會換），開著的 session 再 `/reload-plugins`。
+提交前執行 `claude plugin validate .`。兩份 `plugin.json` 都不設 `version`：Claude Code 安裝的版本跟著 commit 走；Codex 未設版本時一律裝成 `local`，只有 Git 來源的 marketplace 同步會重裝，從本機路徑加入的要在更新 checkout 後重跑 `codex plugin add devteam@gunter-codex`。
+
+Claude Code 使用者可用 `claude plugin marketplace update gunter-plugins` 更新目錄，再以 `claude plugin update devteam@gunter-plugins` 更新套件，並在使用中的 session 執行 `/reload-plugins`。
