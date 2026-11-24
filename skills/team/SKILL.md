@@ -7,15 +7,21 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 
 ## 分工
 
-開發與審查交給 devteam 的角色：`devteam:rd`、`devteam:pm`、`devteam:qa`、`devteam:sa`、`devteam:uiux`，何時用哪一個寫在各自的 description。主 session 不 inline 從頭做到尾。合併前的關卡與開 PR、合併的分工寫在 `${CLAUDE_PLUGIN_ROOT}/agents/rd.md`；主 session 已經自己做完實作的那一次不必重開代理重做，剩下的關卡照它〈關卡〉走完，合併來自票的 PR 之後、回報完成之前走 Definition of Done。
+開發與審查交給 devteam 的角色：`rd`、`pm`、`qa`、`sa`、`uiux`，定義在外掛根目錄的 `agents/<角色>.md`（本技能目錄往上兩層），何時用哪一個寫在各自的 description，派法見〈平台設定〉。主 session 不 inline 從頭做到尾。合併前的關卡與開 PR、合併的分工寫在 [`agents/rd.md`](../../agents/rd.md)；主 session 已經自己做完實作的那一次不必重開代理重做，剩下的關卡照它〈關卡〉走完，合併來自票的 PR 之後、回報完成之前走 Definition of Done。
 
-以隔離 worktree 派出的 `rd` 停在動工前回報、還沒有改動時，worktree 會被清掉；要它繼續就改派新的 `rd`，把前一位的交接寫進派工，不用 SendMessage 喚回——喚回不會重建隔離，它寫不了檔。已有 commit 的分支先確認 worktree 還在再喚回。
+以隔離 worktree 派出的 `rd` 停在動工前回報、還沒有改動時，worktree 會被清掉；要它繼續就改派新的 `rd`，把前一位的交接寫進派工，不喚回原代理——喚回不會重建隔離，它寫不了檔。已有 commit 的分支先確認 worktree 還在再喚回。
+
+## 平台設定
+
+- **Claude Code**：`subagent_type` 寫 `devteam:<角色>`，以前景等回報（`run_in_background: false`）；喚回指 SendMessage。
+- **Codex**：用目前 session 的子代理工具派工，指定角色、任務與工作目錄，請子代理先載入已安裝的 devteam `team` 技能、讀對應的角色檔再執行。子代理讀不到技能時，派工者從已安裝的外掛讀出角色檔，把正文隨任務交給它。角色檔 frontmatter 的 `tools` 只在 Claude Code 強制；Codex 上非 `rd` 角色不改檔只靠下一段的規則。
+- 平行寫入各用獨立 worktree。`rd` 到了派工深度上限開不出審查代理時，由主 session 接手派審查。
 
 只有 `rd` 改 repo 檔案與 commit；其他角色不改，也不用 Bash 繞過，寫 tracker、臨時注入缺陷與實機驗收的例外寫在各自的定義裡。
 
 ## 專案契約
 
-角色只寫通用的做法，專案的事實由 repo 裡這幾個檔提供，角色以「檔名〈節名〉」引用。缺檔或缺節時回報缺哪一個、建議使用者跑 `/devteam:setup-team` 補上，不臆測。每一節要寫什麼在 `${CLAUDE_PLUGIN_ROOT}/skills/setup-team/contract.md`。
+角色只寫通用的做法，專案的事實由 repo 裡這幾個檔提供，角色以「檔名〈節名〉」引用。缺檔或缺節時回報缺哪一個、建議使用者用 devteam 的 `setup-team` 技能補上，不臆測。每一節要寫什麼在 `setup-team` 技能的 `contract.md`。
 
 | 檔案 | 節 |
 | --- | --- |
@@ -36,9 +42,9 @@ description: devteam 角色的分工與共用規則。在有 `docs/agents/dev-wo
 
 ## 取用 skill
 
-frontmatter 有 `disable-model-invocation: true` 的 skill，代理用 Skill 工具叫不動。要照它做時：
+只能由使用者手動啟動的 skill（Claude Code 的 `disable-model-invocation: true`、Codex 的 `allow_implicit_invocation: false`），代理叫不動。devteam 的 `autopilot` 只在使用者明確呼叫時開始，代理不代為展開。其他手動 skill 要照它做時：
 
-1. 找 SKILL.md：在 `~/.claude/plugins`（本機裝在底下的 `cache/`，雲端 session 在 `synced/`）與 Claude 桌面版的資料目錄（macOS 是 `~/Library/Application Support/Claude`，Windows 是 `%APPDATA%\Claude`）底下找 `*/skills/*/<skill>/SKILL.md`。出來多份時取所屬 plugin 的 `.claude-plugin/plugin.json` 版本最高的。找不到就回報沒裝，不猜路徑。
+1. 找 SKILL.md：先從目前平台的技能清單找。Claude Code 沒列出時，在 `~/.claude/plugins`（本機裝在底下的 `cache/`，雲端 session 在 `synced/`）與 Claude 桌面版的資料目錄（macOS 是 `~/Library/Application Support/Claude`，Windows 是 `%APPDATA%\Claude`）底下找 `*/skills/*/<skill>/SKILL.md`。出來多份時取所屬 plugin 的 `.claude-plugin/plugin.json` 版本最高的——快取會留著舊版本。找不到就回報沒裝，不猜路徑。
 2. 連同它引用的參考文件讀完照做。寫 ADR、查或寫 out-of-scope 知識庫的步驟，repo 沒有那個目錄（`docs/adr/`、`.out-of-scope/`）就略過。
 3. 回報標明「照 `<skill>` 的 SKILL.md 展開，不是跑 `/<skill>`」。
 
