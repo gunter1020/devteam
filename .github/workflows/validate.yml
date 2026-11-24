@@ -12,6 +12,19 @@ jobs:
       - uses: actions/checkout@v4
       - name: plugin manifest 與 frontmatter
         run: npx --yes @anthropic-ai/claude-code plugin validate .
+      - name: 改了外掛內容就要升 Codex 的 version
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          head_version=$(jq -er '.version' .codex-plugin/plugin.json)
+          git fetch -q --depth=1 origin "$BASE"
+          if git diff --quiet "$BASE" HEAD -- skills agents .codex-plugin .agents; then exit 0; fi
+          base_version=$(git show "$BASE:.codex-plugin/plugin.json" | jq -r '.version // ""')
+          if [ "$base_version" = "$head_version" ]; then
+            echo "::error file=.codex-plugin/plugin.json::外掛內容有改動，version 仍是 $head_version；Codex 只在 version 變了才重新下載"
+            exit 1
+          fi
       - name: 在空白 repo 安裝 Codex 外掛並讀取共用角色
         env:
           CODEX_HOME: ${{ runner.temp }}/devteam-codex
