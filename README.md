@@ -24,7 +24,7 @@ claude plugin install devteam@gunter-plugins
 
 ## 在專案使用
 
-- **接新 repo**　在目標 repo 呼叫 devteam 的 `setup-team`，建立專案契約。各專案維護自己的指令、標籤與例外；採用預設的章節從 `setup-team` 的 `defaults/` 複製後改寫。[契約內容](skills/setup-team/contract.md)
+- **接新 repo**　在目標 repo 呼叫 devteam 的 `setup-team`，建立專案契約。各專案維護自己的指令、標籤與例外；採用預設的節寫一句引用 `team` 技能的 [defaults/](skills/team/defaults/)，不複製內容。[契約內容](skills/setup-team/contract.md)
 - **指定角色**　例如「請 devteam 的 QA 審查這張 PR 的測試證據」。Claude Code 也可直接指定 `devteam:qa`。Codex 透過 `team` 技能把角色工作交給目前工作階段的子代理。
 - **交辦整張票**　明確選擇 devteam 的 `autopilot` 並指定票號與授權範圍。在 Claude Code 使用 `/devteam:autopilot`。[Autopilot 流程](skills/autopilot/SKILL.md)
 
