@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
       - name: plugin manifest 與 frontmatter
-        run: npx --yes @anthropic-ai/claude-code plugin validate .
+        run: bunx @anthropic-ai/claude-code plugin validate .
       - name: 改了外掛內容就要升 Codex 的 version
         if: github.event_name == 'pull_request'
         env:
@@ -33,8 +34,8 @@ jobs:
           consumer=$(mktemp -d)
           git init -q "$consumer"
           cd "$consumer"
-          npx --yes @openai/codex@0.172.0 plugin marketplace add "$GITHUB_WORKSPACE"
-          installation=$(npx --yes @openai/codex@0.172.0 plugin add devteam@gunter-codex --json)
+          bunx @openai/codex@0.172.0 plugin marketplace add "$GITHUB_WORKSPACE"
+          installation=$(bunx @openai/codex@0.172.0 plugin add devteam@gunter-codex --json)
           installed=$(jq -er '.installedPath' <<< "$installation")
           diff -qr "$GITHUB_WORKSPACE/skills" "$installed/skills"
           diff -qr "$GITHUB_WORKSPACE/agents" "$installed/agents"
