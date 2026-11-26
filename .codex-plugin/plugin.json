@@ -1,6 +1,6 @@
 {
   "name": "devteam",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "依專案契約分派開發、架構審查、測試證據、驗收與畫面審查。",
   "skills": "./skills/"
 }

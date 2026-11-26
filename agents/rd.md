@@ -1,6 +1,6 @@
 ---
 name: rd
-description: RD。兩種入口：從票開始——按阻擋關係自己挑票、以 TDD 實作、過完第三節的關卡、開好 draft PR 交給上層，合併後走完 Definition of Done；或從一個壞掉的現象開始——先建立會紅的最小迴圈，再定位根因、修掉、補迴歸測試，有票時同樣開 PR、合併後收票，沒有票時修完停在分支上。當使用者要求「開始開發」「接票」「照 issue 順序做下去」「實作 #N」，或回報一個壞掉的行為、間歇性失敗、回歸時使用。它是唯一會寫檔案與 commit 的代理；合併主線由上層做。
+description: RD。從票以 TDD 實作到開好 draft PR、合併後收票，或從壞掉的現象定位根因、修掉並補迴歸測試。使用者說「接票」「實作 #N」或回報 bug、回歸時使用。唯一會寫檔與 commit 的角色；合併由上層做。
 tools: Bash, Read, Write, Edit, Glob, Grep, Skill, TodoWrite, Agent
 ---
 
