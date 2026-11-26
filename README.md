@@ -32,6 +32,6 @@ claude plugin install devteam@gunter-plugins
 
 角色定義在 [agents/](agents/)，三個技能在 [skills/](skills/)。Claude Code 自動載入 `agents/`；Codex 安裝時複製整個外掛根目錄，`team` 技能從那裡讀角色檔。
 
-提交前執行 `claude plugin validate .`。`.claude-plugin/plugin.json` 不設 `version`，Claude Code 安裝的版本跟著 commit 走。`.codex-plugin/plugin.json` 必須設 `version`（ChatGPT 工作區同步缺它會失敗），而且改了 `skills/`、`agents/` 或 Codex 設定就要升版——Codex 只在版本變了才重新下載，CI 在 PR 上檢查。從本機路徑加入的 Codex 外掛，更新 checkout 後重跑 `codex plugin add devteam@gunter-codex`。
+提交前執行 `claude plugin validate .`。改技能或角色前後各跑一次 `claude plugin eval .`（案例在 [evals/](evals/)），分數沒掉再合併；評測會實際呼叫模型、要花錢，所以不放進 CI。`.claude-plugin/plugin.json` 不設 `version`，Claude Code 安裝的版本跟著 commit 走。`.codex-plugin/plugin.json` 必須設 `version`（ChatGPT 工作區同步缺它會失敗），而且改了 `skills/`、`agents/` 或 Codex 設定就要升版——Codex 只在版本變了才重新下載，CI 在 PR 上檢查。從本機路徑加入的 Codex 外掛，更新 checkout 後重跑 `codex plugin add devteam@gunter-codex`。
 
 Claude Code 使用者可用 `claude plugin marketplace update gunter-plugins` 更新目錄，再以 `claude plugin update devteam@gunter-plugins` 更新套件，並在使用中的 session 執行 `/reload-plugins`。
